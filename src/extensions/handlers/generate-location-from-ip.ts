@@ -1,16 +1,18 @@
 import axios from "axios"
 import { IP_INFO_TOKEN } from "../../config/app.keys"
 import { Response } from "express"
+import AppError from "../libs/app-error"
 
-async function getLocationFromIpAddress(res: Response, ip: string) {
-  // if (ip === "::1" || ip === "127.0.0.1" || ip.startsWith("::ffff:127.0.0.1")) {
-  //   return res.status(400).send("Unable to determine public IP address")
-  // }
+async function getLocationFromIpAddress(
+  _res: Response,
+  ip: string
+): Promise<{ city: string; lat: string; long: string }> {
+  if (ip === "::1" || ip === "127.0.0.1" || ip.startsWith("::ffff:127.0.0.1")) {
+    throw new AppError("Unable to determine public IP address", 400)
+  }
 
-  // 102.88.71.154
-  // `https://ipinfo.io/${ip}/json?token=${IP_INFO_TOKEN}`
   const response = await axios.get(
-    ` https://ipinfo.io/102.88.71.154/json?token=3393bdb2f5c6d1`
+    `https://ipinfo.io/${ip}/json?token=${IP_INFO_TOKEN}`
   )
 
   return {
@@ -21,5 +23,3 @@ async function getLocationFromIpAddress(res: Response, ip: string) {
 }
 
 export default getLocationFromIpAddress
-
-// https://ipinfo.io/102.88.71.154/json?token=3393bdb2f5c6d1
