@@ -1,14 +1,14 @@
 import axios from "axios"
-import { IP_INFO_TOKEN } from "../../config/app.keys"
 import { Response } from "express"
-import AppError from "../libs/app-error"
+import { IP_INFO_TOKEN } from "../../config/app.keys"
 
 async function getLocationFromIpAddress(
   _res: Response,
   ip: string
-): Promise<{ city: string; lat: string; long: string }> {
+): Promise<{ city: string; lat: string; long: string } | null> {
   if (ip === "::1" || ip === "127.0.0.1" || ip.startsWith("::ffff:127.0.0.1")) {
-    throw new AppError("Unable to determine public IP address", 400)
+    return null
+    // throw new AppError("Unable to determine public IP address", 400)
   }
 
   const response = await axios.get(

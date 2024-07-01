@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express"
-import AppError from "../libs/app-error"
 
 export const ignoreFavicon = (
   req: Request,
@@ -14,8 +13,8 @@ export const ignoreFavicon = (
 
 export const unknownEndpoint = (
   req: Request,
-  _res: Response,
+  res: Response,
   next: NextFunction
 ) => {
-  next(new AppError(`Cannot find ${req.originalUrl} on the server`, 404))
+  next(res.status(404).send(`Cannot find ${req.originalUrl} on the server`))
 }
