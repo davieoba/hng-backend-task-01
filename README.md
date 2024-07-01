@@ -10,3 +10,5 @@ yarn add express ts-node cross-env
 ```
 
 then run `npx tsc --init` to generate the `tsconfig.json`
+
+start the server in development `yarn dev` for production run `yarn start` to build run `yarn build`
