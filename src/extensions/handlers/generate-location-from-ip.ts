@@ -8,12 +8,12 @@ async function getLocationFromIpAddress(
 ): Promise<{ city: string; lat: string; long: string } | null> {
   if (ip === "::1" || ip === "127.0.0.1" || ip.startsWith("::ffff:127.0.0.1")) {
     return null
-    // throw new AppError("Unable to determine public IP address", 400)
   }
 
   const response = await axios.get(
     `https://ipinfo.io/${ip}/json?token=${IP_INFO_TOKEN}`
   )
+  // `https://ipinfo.io/${ip}/json?token=${IP_INFO_TOKEN}`
 
   return {
     city: response.data.city,
