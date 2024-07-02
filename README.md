@@ -13,6 +13,6 @@ then run `npx tsc --init` to generate the `tsconfig.json`
 
 start the server in development `yarn dev` for production run `yarn start` to build run `yarn build`
 
-Api endpoints
+##### Api endpoints 
 `/health` -> to check if the server is running. <br />
 `/api/hello?visitor_name=James` -> is the task endpoint
